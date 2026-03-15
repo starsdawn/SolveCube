@@ -42,6 +42,7 @@ surfaces = [
     [0, 1, 5, 4]  # 右面 (Right)
 ]
 
+rotate_degree = 15
 spinning = False
 op_index = 0
 op = []
@@ -200,6 +201,7 @@ def draw(cube):
     rotation_x, rotation_y = 0, 0
     mouse_down = False
 
+    clock = pygame.time.Clock()
     # 主循环
     while cube.keep_draw:
         for event in pygame.event.get():
@@ -230,14 +232,14 @@ def draw(cube):
         # 绘制三阶魔方
         draw_rubiks_cube(cube)
         if spinning:
-            degree += 10
+            degree += rotate_degree
             if degree >= 90:
                 degree = 0
                 spinning = False
                 recover(cube)
         glPopMatrix()
         pygame.display.flip()
-        pygame.time.wait(8)
+        clock.tick(240)
 
 
 def recover(cube):
